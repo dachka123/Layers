@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+// FIXME: აქაც იგივე რაც წინა ვიუმოდელზე დაგიწერე ფლოუდ გარდაქმნა უსქეისში არ უნდა გეწეროს
 class GetUsersUseCase @Inject constructor(
     private val repository: UserRepository
 ) {

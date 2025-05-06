@@ -22,16 +22,19 @@ import com.example.layers.domain.model.User
 fun UserListItem(
     user: User,
     modifier: Modifier = Modifier,
+    // FIXME: უზერს რომ აბრუნებდეს არაა საჭირო არც იყენებ მაგ დაბრუნებულ მნიშვნელობას
     onItemClick: (User) -> Unit
 ) {
     Row(
         modifier = modifier
-            .fillMaxWidth().clickable { onItemClick(user) }
+            .fillMaxWidth()
+            .clickable { onItemClick(user) }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
             model = user.avatar_url,
+            // FIXME: სტრინგი რესურსებში გაიტანე ან null მიაწერე
             contentDescription = "User Avatar",
             modifier = Modifier
                 .size(48.dp)

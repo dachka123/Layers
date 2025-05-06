@@ -22,9 +22,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LayersTheme {
+                // FIXME: გამოიყენე scaffold გაარკვიე რატო და როგორ
+                // FIXME : სარფეისის გამოყენება არაა  აქ საჭირო ზოგადად სარფეისი კომპონენტების აწყობისას თუ გამოგადგება ისე არა
                 Surface(color = MaterialTheme.colorScheme.background){
                     val navController = rememberNavController()
+
                     NavHost(navController = navController, startDestination = Screen.UserListScreen.route){
+                        // FIXME: ეს კომპუზებლ ფუნქციები რომლებსაც იყენებ არის ძველი პრაქტიკებით ახალზე გადააწყე დაახლოებით ასე composable<SCREENROUTE>(){....}
+                        // FIXME: სქრინს ნავ კონტროლერი არ უნდა ჩააწოდო ლამბდის მეშვეობით უნდა დააბრუნო ქოლბექი და გარეთ დაჰენდლო
                         composable(route = Screen.UserListScreen.route) {
                             UserListScreen(navController)
                         }

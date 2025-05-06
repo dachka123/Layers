@@ -14,8 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserListViewModel @Inject constructor(
+    // FIXME: დიდი ასოთი არ უნდა იწყებოდეს ცვლადის სახელი
     private val GetUsersUseCase: GetUsersUseCase
-): ViewModel() {
+) : ViewModel() {
 
     var state by mutableStateOf(UserListState())
         private set
@@ -24,16 +25,21 @@ class UserListViewModel @Inject constructor(
         getUsers()
     }
 
-    private fun getUsers(){
+    private fun getUsers() {
+        // FIXME: მეინზე არის გაშვებული ეს არასწორია
         GetUsersUseCase().onEach { result ->
-            when(result){
+            when (result) {
                 is Resource.Success -> {
+                    // FIXME: ასე არ უნდა დააპდეითო სთეითი ძველი უნდა დააკოპირო და ახალი დატათი ჩაანაცვლო
                     state = UserListState(users = result.data ?: emptyList())
                 }
+
                 is Resource.Error -> {
                     state = UserListState(error = result.message ?: "unexpected error occured")
                 }
-                is Resource.Loading ->{
+
+                is Resource.Loading -> {
+                    // FIXME: ეს ლოადინგი არასდროს ფოლსდება
                     state = UserListState(isLoading = true)
                 }
             }

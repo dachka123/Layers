@@ -20,6 +20,13 @@ class UserDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
+    // FIXME: ისე კაი იქნება თუ ჩახედავ ბეიზვიუმოდელს და მაგის უსქეისებს
+    //  კაი იქნება თუ MVI design pattern-ს მოიძიებ აქ პატარა ვიუმოდელია
+    //  თუმცა უეჭველი დაგჭირდება 99% შემთხვევებში
+
+    // FIXME: რატო mutablestateof და არა MutableStateFlow
+    //  რა სხვაობაა და რითი ჯობია ერთი მეორეს
+    //  როდის რომელი უნდა გამოიყენო და ა.შ.
     var state by mutableStateOf(UserDetailState())
         private set
 
@@ -29,6 +36,7 @@ class UserDetailViewModel @Inject constructor(
         }
     }
 
+    // FIXME: აქაც იგივე რაც წინა ვიუმოდელში
     private fun getUser(userLogin: String){
         getUserUseCase(userLogin).onEach { result ->
             when(result){

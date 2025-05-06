@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    // FIXME: კატალოგში გაიტანე ეს პლაგინები და იქიდან გამოიყენე
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     alias(libs.plugins.compose.compiler)
@@ -42,6 +43,7 @@ android {
     buildFeatures {
         compose = true
     }
+    // FIXME: ზედმეტია ეს როდესაც კოტლინ 2.0 + იყენებ
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -87,6 +89,7 @@ dependencies {
 
     //Dagger - Hilt
     implementation (libs.hilt.android)
+    // FIXME: რუმის დეფენდენსი არ გჭირდება ტყუილად გაქვს
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.compiler)
     implementation (libs.androidx.hilt.navigation.compose)

@@ -2,6 +2,9 @@ package com.example.layers.data.remote.dto
 
 import com.example.layers.domain.model.UserDetail
 
+//FIXME: ქვედა ტირეთი არ შეიძლება კლასის წევრები რო გეწეროს ქემელქეისი უნდა
+//FIXME: გაარკვიე ეგ როგორ უნდა ქნა
+//  თუ ყველა ატრიბუტი არ გჭირდება DTO მოდელში ტყუილად არ უნდა გქონდეს დაწერილი
 data class UserDetailDto(
     val avatar_url: String,
     val blog: String,
@@ -35,6 +38,10 @@ data class UserDetailDto(
     val user_view_type: String
 )
 
+// FIXME: მაპერს როგორც წესი ისეთი სახელი უნდა ქონდეს რო მიახვედრებდეს სად
+//  იმაპება მაგ. toDto , toDomain, toEntity, toPresentation
+//  შესაბამისად toUserDetailDomain უნდა ერქვას ცალკეც დაგიწერე მაგაზე
+//  ეს ცოტა მიდგომის საკითხია თუმცა კარგი იქნება რო ეს მაპერი ცალკე ფაილში იყოს
 fun UserDetailDto.toUserDetail(): UserDetail{
     return UserDetail(
         userLogin = login,

@@ -2,6 +2,9 @@ package com.example.layers.data.remote.dto
 
 import com.example.layers.domain.model.User
 
+// FIXME: აქაც გაასწორე ქვედა ტირეებით არ უნდა იყოს
+//  სახელები და უნდა იყოს CamelCase
+
 data class UserDto(
     val avatar_url: String,
     val events_url: String,
@@ -24,6 +27,7 @@ data class UserDto(
     val user_view_type: String
 )
 
+// FIXME: მაპერის სახელი აქაც გაასწორე
 fun UserDto.toUser(): User{
     return User(
         id = id,
