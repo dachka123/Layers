@@ -1,9 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -26,10 +27,11 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", "\"https://test-be1f0-default-rtdb.europe-west1.firebasedatabase.app/\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://test-be1f0-default-rtdb.europe-west1.firebasedatabase.app/\"")
         }
     }
     compileOptions {
@@ -41,9 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        buildConfig = true
     }
     packaging {
         resources {
@@ -87,7 +87,6 @@ dependencies {
 
     //Dagger - Hilt
     implementation (libs.hilt.android)
-    ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.compiler)
     implementation (libs.androidx.hilt.navigation.compose)
 
@@ -96,4 +95,7 @@ dependencies {
     implementation (libs.converter.gson)
     implementation (libs.okhttp)
     implementation (libs.logging.interceptor)
+
+    implementation(libs.kotlinx.serialization.json)
+
 }

@@ -1,41 +1,29 @@
 package com.example.layers.data.repository
 
+import com.example.layers.common.Resource
 import com.example.layers.data.remote.UserApi
-import com.example.layers.data.remote.dto.toUser
-import com.example.layers.data.remote.dto.toUserDetail
-import com.example.layers.domain.model.User
-import com.example.layers.domain.model.UserDetail
+import com.example.layers.data.remote.dto.toUserDomain
+import com.example.layers.data.remote.dto.toUserDetailDomain
+import com.example.layers.domain.model.UserDomain
+import com.example.layers.domain.model.UserDetailDomain
 import com.example.layers.domain.repository.UserRepository
-import retrofit2.HttpException
-import java.io.IOException
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    private val api: UserApi
+    private val api: UserApi,
+    private val handler: NetworkHandler
 ): UserRepository {
 
-
-    //restored
-    override suspend fun getUsers(): List<User> {
-
-        return try{
-            api.getUsers().map { it.toUser() }
-        }catch (e: HttpException){
-            throw Exception(e.localizedMessage ?: "An unexpected error occurred")
-        }catch (e: IOException){
-            throw Exception("Couldn't reach server. Check your internet connection.")
+    override suspend fun getUsers(): Flow<Resource<List<UserDomain>>>{
+        return handler.safeApiCall {
+            api.getUsers().map { it.toUserDomain() }
         }
     }
 
-    override suspend fun getUserByName(userLogin: String): UserDetail {
-        return try{
-            api.getUserByName(userLogin).toUserDetail()
-        }catch (e: HttpException){
-            throw Exception(e.localizedMessage ?: "An unexpected error occurred")
-        }catch (e: IOException){
-            throw Exception("Couldn't reach server. Check your internet connection.")
+    override suspend fun getUserByName(userLogin: String): Flow<Resource<UserDetailDomain>>{
+        return handler.safeApiCall {
+            api.getUserByName(userLogin).toUserDetailDomain()
         }
     }
-
-
 }

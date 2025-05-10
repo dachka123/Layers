@@ -1,4 +1,4 @@
-package com.example.layers.presentation.theme.ui.user_list
+package com.example.layers.presentation.Screen.user_list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -16,23 +16,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.layers.domain.model.User
+import com.example.layers.domain.model.UserDomain
 
 @Composable
 fun UserListItem(
-    user: User,
+    userDomain: UserDomain,
     modifier: Modifier = Modifier,
-    onItemClick: (User) -> Unit
+    onItemClick: () -> Unit
 ) {
     Row(
         modifier = modifier
-            .fillMaxWidth().clickable { onItemClick(user) }
+            .fillMaxWidth().clickable { onItemClick() }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            model = user.avatar_url,
-            contentDescription = "User Avatar",
+            model = userDomain.avatarUrl,
+            contentDescription = null,
             modifier = Modifier
                 .size(48.dp)
                 .clip(CircleShape)
@@ -41,7 +41,7 @@ fun UserListItem(
         Spacer(modifier = Modifier.width(16.dp))
 
         Text(
-            text = user.login,
+            text = userDomain.login,
             style = MaterialTheme.typography.bodyLarge
         )
     }
