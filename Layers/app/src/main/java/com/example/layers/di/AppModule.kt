@@ -1,5 +1,6 @@
 package com.example.layers.di
 
+import com.example.layers.BuildConfig
 import com.example.layers.data.remote.UserApi
 import com.example.layers.data.repository.NetworkHandler
 import com.example.layers.data.repository.UserRepositoryImpl
@@ -11,21 +12,18 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-//import com.example.layers.BuildConfig
-import com.example.layers.common.Constants
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    //val baseUrl = BuildConfig.BASE_URL
-    //build configshi gadavitane mara ar aimportebs
+    val baseUrl = BuildConfig.BASE_URL
 
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
